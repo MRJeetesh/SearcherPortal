@@ -1,0 +1,60 @@
+.comparison-container {
+    width: 80%;
+    margin: 20px auto;
+    text-align: center;
+  }
+  
+  .search-bar {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .search-bar input {
+    width: 300px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .search-bar select,
+  .search-bar button {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .search-bar button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+  }
+  
+  .results-summary {
+    margin-top: 20px;
+  }
+  
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .comparison-table th, .comparison-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+  }
+  
+  .comparison-table th {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  .comparison-table td {
+    background-color: white;
+  }
+  

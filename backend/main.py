@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from search_service.routes import router as search_router
 from logging_service.routes import router as logging_router
 from indexing_service.routes import router as indexing_router
+from performance_service.routes import router as performance_router
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
@@ -17,9 +18,10 @@ app.add_middleware(
    allow_methods=["*"],
    allow_headers=["*"],
 )
-app.include_router(search_router, prefix="/api/search")
-app.include_router(logging_router, prefix="/api")
-app.include_router(indexing_router, prefix="/api")
+app.include_router(search_router, prefix="/api/search", tags=["Search"])
+app.include_router(logging_router, prefix="/api/logs", tags=["Logging"])
+app.include_router(indexing_router, prefix="/api/index", tags=["Indexing"])
+app.include_router(performance_router, prefix="/api/performance", tags=["Performance"])
 
 @app.get("/")
 async def root():

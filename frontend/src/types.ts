@@ -55,3 +55,28 @@ export interface SearchResult {
   zoning_info: ZoningInfo;
   property_features: PropertyFeatures;
 }
+
+export interface PerformanceMetrics {
+  executionTime: {
+    initialSearchMs: number;
+    optimizedSearchMs: number;
+  };
+  resultsComparison: {
+    totalInitialResults: number;
+    totalOptimizedResults: number;
+    commonProperties: number;
+    uniqueToInitial: number;
+    uniqueToOptimized: number;
+  };
+  searchEffectiveness: {
+    initialSimilarityScore: number;
+    optimizedSimilarityScore: number;
+  };
+  cachingPerformance: {
+    cacheHit: boolean;
+    cacheResponseTimeMs: number;
+    cacheMiss: boolean;
+  };
+}
+
+
