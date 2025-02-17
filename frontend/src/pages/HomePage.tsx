@@ -7,8 +7,8 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="home-container">
-      <h1>Search Comparison Portal</h1>
-      <p>Select a search type to proceed.</p>
+      <h1>🔍 Search Comparison Portal</h1>
+      <p>Choose a search strategy to proceed.</p>
 
       <div className="search-options">
         <div className="search-card search-1" onClick={() => navigate("/search1")}>
@@ -25,7 +25,7 @@ const HomePage: React.FC = () => {
       </div>
 
       <div className="performance-section">
-        <h3>Want to compare search performance?</h3>
+        <p>Want to compare search performance?</p>
         <button className="performance-btn" onClick={() => navigate("/performance")}>
           Go to Performance Page
         </button>

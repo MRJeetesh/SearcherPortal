@@ -1,6 +1,6 @@
-export interface Owner {
+export interface PropertyOwner {
   owner_name: string;
-  owner_type: string; // Individual or Corporation
+  owner_type: string;
 }
 
 export interface SaleHistory {
@@ -9,7 +9,6 @@ export interface SaleHistory {
   buyer: string;
   seller: string;
   payment_method: string;
-  real_estate_agent: string;
 }
 
 export interface Mortgage {
@@ -48,8 +47,8 @@ export interface PropertyFeatures {
 export interface SearchResult {
   property_id: string;
   address: string;
-  owners: Owner[];
   legal_description: string;
+  owners: PropertyOwner[];
   sale_history: SaleHistory[];
   mortgages: Mortgage[];
   encumbrances: Encumbrance[];

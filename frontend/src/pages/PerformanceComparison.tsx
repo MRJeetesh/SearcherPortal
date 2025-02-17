@@ -1,51 +1,33 @@
 import React, { useState } from "react";
 import { fetchInitialSearch, fetchOptimizedSearch } from "../services/searchService";
 import ResultsTable from "../components/ResultsTable";
-
-interface Result {
-  property_id: string;
-  address: string;
-  owners: { owner_name: string; owner_type: string }[];
-}
+import "../styles/index.css";
 
 const PerformanceComparison: React.FC = () => {
   const [query, setQuery] = useState("");
-  const [initialResults, setInitialResults] = useState<Result[]>([]);
-  const [optimizedResults, setOptimizedResults] = useState<Result[]>([]);
+  const [initialResults, setInitialResults] = useState([]);
+  const [optimizedResults, setOptimizedResults] = useState([]);
   const [initialTime, setInitialTime] = useState(0);
   const [optimizedTime, setOptimizedTime] = useState(0);
-  const [error, setError] = useState("");
 
   const handleCompare = async () => {
-    if (!query.trim()) {
-      setError("Please enter a search query.");
-      return;
-    }
-    setError("");
+    if (!query.trim()) return;
 
-    try {
-      // Measure Initial Search Time
-      const startInitial = performance.now();
-      const initialData = await fetchInitialSearch(query);
-      const endInitial = performance.now();
-      setInitialTime(endInitial - startInitial);
-      setInitialResults(initialData.results || []);
+    const startInitial = performance.now();
+    const initialData = await fetchInitialSearch(query);
+    setInitialResults(initialData.results || []);
+    setInitialTime(performance.now() - startInitial);
 
-      // Measure Optimized Search Time
-      const startOptimized = performance.now();
-      const optimizedData = await fetchOptimizedSearch(query);
-      const endOptimized = performance.now();
-      setOptimizedTime(endOptimized - startOptimized);
-      setOptimizedResults(optimizedData.results || []);
-    } catch (err) {
-      setError("Failed to fetch results. Please try again.");
-    }
+    const startOptimized = performance.now();
+    const optimizedData = await fetchOptimizedSearch(query);
+    setOptimizedResults(optimizedData.results || []);
+    setOptimizedTime(performance.now() - startOptimized);
   };
 
   return (
-    <div className="performance-container">
-      <h1>Search Performance Comparison</h1>
-      <p>Compare how the optimized search performs against the initial search.</p>
+    <div className="comparison-container">
+      <h1>Performance Comparison</h1>
+      <p>Compare the execution time and results of the two search strategies.</p>
 
       <div className="search-box">
         <input
@@ -57,19 +39,17 @@ const PerformanceComparison: React.FC = () => {
         <button onClick={handleCompare}>Compare</button>
       </div>
 
-      {error && <p className="error-message">{error}</p>}
-
-      <div className="results-section">
+      <div className="comparison-results">
         <div className="result-box">
           <h2>Initial Search</h2>
           <p>Execution Time: <strong>{initialTime.toFixed(2)} ms</strong></p>
-          <ResultsTable results={initialResults} />
+          <ResultsTable results={initialResults} isPerformancePage={true} />
         </div>
 
         <div className="result-box">
           <h2>Optimized Search</h2>
           <p>Execution Time: <strong>{optimizedTime.toFixed(2)} ms</strong></p>
-          <ResultsTable results={optimizedResults} />
+          <ResultsTable results={optimizedResults} isPerformancePage={true} />
         </div>
       </div>
     </div>
