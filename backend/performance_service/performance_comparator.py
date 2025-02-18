@@ -72,7 +72,7 @@ async def compare_search_performance(
         initial_similarity = calculate_average_similarity(query, initial_data)
         optimized_similarity = calculate_average_similarity(query, optimized_data)
 
-        # ✅ Return only performance metrics (Fix Applied)
+        # Return only performance metrics
         performance_data = {
             "execution_time": {
                 "initial_search_ms": round(initial_time, 2),

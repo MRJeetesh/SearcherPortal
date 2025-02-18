@@ -13,7 +13,6 @@ def is_damerau_levenshtein_match(query: str, candidate: str, threshold: float = 
     return distance <= threshold  # Lower distance means higher similarity
 
 
-
 # Define the vectorizer globally to avoid reloading it each time
 vectorizer = TfidfVectorizer(analyzer="char", ngram_range=(2, 3))  # Bi-gram & Tri-gram
 
