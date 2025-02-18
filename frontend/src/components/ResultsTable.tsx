@@ -1,73 +1,60 @@
 import React, { useState } from "react";
 import { SearchResult } from "../types";
-import "../styles/index.css";
+import "../styles/style.css";
+import { Home, Users, MapPin, Layers, Ruler, CheckCircle, XCircle } from "lucide-react"; // Icons for UI enhancement
 
 interface ResultsTableProps {
   results: SearchResult[];
-  isPerformancePage?: boolean; // Determines whether to show all details
 }
 
-const ResultsTable: React.FC<ResultsTableProps> = ({ results, isPerformancePage = false }) => {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+const ResultsTable: React.FC<ResultsTableProps> = ({ results }) => {
+  const [visibleCount, setVisibleCount] = useState(10); // Show 10 results initially
+
+  // Function to load more results
+  const handleShowMore = () => {
+    setVisibleCount((prev) => prev + 10);
+  };
 
   return (
     <div className="results-container">
+      {/* Total Results Count */}
+      {results.length > 0 && (
+        <div className="results-count">
+          <p>🔍 Showing <strong>{Math.min(visibleCount, results.length)}</strong> out of <strong>{results.length}</strong> results</p>
+        </div>
+      )}
+
       {results.length === 0 ? (
-        <p>No results found.</p>
+        <p className="no-results">No results found.</p>
       ) : (
-        <table className="search-results-table">
-          <thead>
-            <tr>
-              <th>Address</th>
-              {isPerformancePage && <th>Owners</th>}
-              {isPerformancePage && <th>Property Type</th>}
-              {isPerformancePage && <th>Year Built</th>}
-              {isPerformancePage && <th>Square Feet</th>}
-              {isPerformancePage && <th>Zoning</th>}
-            </tr>
-          </thead>
-          <tbody>
-            {results.map((res, index) => (
-              <React.Fragment key={index}>
-                <tr
-                  className="address-row"
-                  onMouseEnter={() => !isPerformancePage && setExpandedIndex(index)}
-                  onMouseLeave={() => !isPerformancePage && setExpandedIndex(null)}
-                >
-                  <td>{res.address}</td>
-                  {isPerformancePage && <td>{res.owners.map(owner => owner.owner_name).join(", ")}</td>}
-                  {isPerformancePage && <td>{res.property_features.property_type}</td>}
-                  {isPerformancePage && <td>{res.property_features.year_built}</td>}
-                  {isPerformancePage && <td>{res.property_features.square_feet}</td>}
-                  {isPerformancePage && <td>{res.zoning_info.zoning_type}</td>}
-                </tr>
-
-                {/* Expandable details only for search results (not performance page) */}
-                {!isPerformancePage && expandedIndex === index && (
-                  <tr className="expanded-row">
-                    <td colSpan={1}>
-                      <div className="expanded-content">
-                        <h3>🏠 Property Overview</h3>
-                        <p><strong>Property ID:</strong> {res.property_id}</p>
-                        <p><strong>Legal Description:</strong> {res.legal_description}</p>
-
-                        <h3>Owners</h3>
-                        <p>{res.owners.map(owner => `${owner.owner_name} (${owner.owner_type})`).join(", ")}</p>
-
-                        <h3>📜 Zoning</h3>
-                        <p>{res.zoning_info.zoning_type}, {res.zoning_info.lot_size_acres} acres</p>
-
-                        <h3>🏡 Features</h3>
-                        <p>{res.property_features.property_type}, {res.property_features.bedrooms} Beds, {res.property_features.bathrooms} Baths</p>
-                        <p>Garage: {res.property_features.garage}, Pool: {res.property_features.pool}</p>
-                      </div>
-                    </td>
-                  </tr>
-                )}
-              </React.Fragment>
+        <>
+          <div className="results-grid">
+            {results.slice(0, visibleCount).map((res, index) => (
+              <div className="result-card" key={index}>
+                <h3><Home size={18} /> {res.address}</h3>
+                <p><Users size={16} /> <strong>Owners:</strong> {res.owners.map(owner => owner.owner_name).join(", ")}</p>
+                <p><MapPin size={16} /> <strong>Zoning:</strong> {res.zoning_info.zoning_type}</p>
+                <p><Layers size={16} /> <strong>Property Type:</strong> {res.property_features.property_type}</p>
+                
+                {/* Expandable Section */}
+                <div className="expandable-content">
+                  <p><strong>Legal Description:</strong> {res.legal_description}</p>
+                  <p><Ruler size={16} /> <strong>Square Feet:</strong> {res.property_features.square_feet}</p>
+                  <p><strong>Year Built:</strong> {res.property_features.year_built}</p>
+                  <p>{res.property_features.garage ? <CheckCircle size={16} color="green" /> : <XCircle size={16} color="red" />} <strong>Garage:</strong> {res.property_features.garage ? "Yes" : "No"}</p>
+                  <p>{res.property_features.pool ? <CheckCircle size={16} color="green" /> : <XCircle size={16} color="red" />} <strong>Pool:</strong> {res.property_features.pool ? "Yes" : "No"}</p>
+                </div>
+              </div>
             ))}
-          </tbody>
-        </table>
+          </div>
+
+          {/* Show More Button */}
+          {visibleCount < results.length && (
+            <div className="show-more-container">
+              <button className="show-more-btn" onClick={handleShowMore}>Show More</button>
+            </div>
+          )}
+        </>
       )}
     </div>
   );

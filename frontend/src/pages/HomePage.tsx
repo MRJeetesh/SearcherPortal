@@ -1,34 +1,37 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/index.css";
+import { Scale } from "lucide-react"; // Using Scale icon for comparison
+import "../styles/style.css";
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
 
   return (
     <div className="home-container">
-      <h1>🔍 Search Comparison Portal</h1>
-      <p>Choose a search strategy to proceed.</p>
-
-      <div className="search-options">
-        <div className="search-card search-1" onClick={() => navigate("/search1")}>
-          <h2>Search 1 (Initial)</h2>
-          <p>A fuzzy search with typo handling and basic ranking.</p>
-          <button>Go to Search 1</button>
+      <div className="layout-container">
+        {/* Left Section - Search 1 */}
+        <div className="search-section left" onClick={() => navigate("/search1")}>
+          <div className="search-box">
+            <h2>Search 1 (Basic)</h2>
+            <p>Fuzzy search with typo handling and basic ranking.</p>
+          </div>
         </div>
 
-        <div className="search-card search-2" onClick={() => navigate("/search2")}>
-          <h2>Search 2 (Optimized)</h2>
-          <p>Combines optimized and advanced search for better accuracy.</p>
-          <button>Go to Search 2</button>
+        {/* Middle Section - Performance Comparison */}
+        <div className="performance-section" onClick={() => navigate("/performance")}>
+          <div className="performance-circle">
+            <Scale size={32} color="white" />
+            <p>Compare</p>
+          </div>
         </div>
-      </div>
 
-      <div className="performance-section">
-        <p>Want to compare search performance?</p>
-        <button className="performance-btn" onClick={() => navigate("/performance")}>
-          Go to Performance Page
-        </button>
+        {/* Right Section - Search 2 */}
+        <div className="search-section right" onClick={() => navigate("/search2")}>
+          <div className="search-box">
+            <h2>Search 2 (Optimized)</h2>
+            <p>Enhanced search accuracy with optimized filtering.</p>
+          </div>
+        </div>
       </div>
     </div>
   );

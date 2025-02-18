@@ -4,7 +4,7 @@ import HomePage from "./pages/HomePage";
 import InitialSearchPage from "./pages/InitialSearchPage";
 import OptimizedSearchPage from "./pages/OptimizedSearchPage";
 import PerformanceComparison from "./pages/PerformanceComparison";
-import "./styles/colors.css"; 
+import "./styles/style.css"; 
 
 const App: React.FC = () => {
   return (

@@ -1,0 +1,372 @@
+/* Root Variables */
+:root {
+    --primary-color: #1C97FC; /* Bright Blue */
+    --secondary-color: #D4E8FF; /* Soft Light Blue */
+    --accent-color: #88C2FF; /* Mid-tone Blue */
+    --background-light: #F0F8FF; /* Very Light Blue */
+    --background-dark: #000000; /* Black */
+    --text-dark: #000000; /* Black */
+    --text-light: #FFFFFF; /* White */
+    --card-bg: #A8C4E0; /* Light Blue */
+    --hover-bg: #0066CC; /* Bright Blue */
+}
+
+/* Reset Default Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+}
+
+/* -------------------------------- */
+/* HOMEPAGE STYLING */
+/* -------------------------------- */
+.home-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background-light);
+}
+
+.layout-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Search Sections (Left and Right) */
+.search-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    height: 100%;
+    position: relative;
+    z-index: 5;
+}
+
+.left {
+    background-color: var(--primary-color);
+    color: var(--text-dark);
+}
+
+.right {
+    background-color: var(--secondary-color);
+    color: var(--text-dark);
+}
+
+/* Consistent Search Box Style for HomePage */
+.search-box {
+    padding: 30px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 350px; /* Increased for Consistency */
+    transition: transform 0.3s ease-in-out;
+}
+
+.search-box:hover {
+    background-color: var(--hover-bg);
+    transform: scale(1.05);
+}
+
+/* Middle Performance Section */
+.performance-section {
+    flex: 0.5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.performance-circle {
+    width: 90px;
+    height: 90px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.performance-circle:hover {
+    background-color: var(--hover-bg);
+    transform: scale(1.1);
+}
+
+.performance-circle svg {
+    margin-bottom: 5px;
+}
+
+.performance-circle p {
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+.search-section:hover {
+    transform: scale(1.02);
+    z-index: 5;
+}
+
+/* -------------------------------- */
+/* INITIAL & OPTIMIZED SEARCH PAGE */
+/* -------------------------------- */
+.search-page, .optimized-search-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+.search-header, .optimized-search-header {
+    width: 100%;
+    height: 250px;
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+}
+
+.optimized-search-header {
+    background-color: var(--secondary-color);
+    color: var(--text-dark);
+}
+
+.search-header h1, .optimized-search-header h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+}
+
+/* Search Bar */
+.search-bar {
+    display: flex;
+    gap: 10px;
+    position: relative;
+    max-width: 700px;
+    width: 100%;
+    justify-content: center;
+}
+
+.search-bar input, .filter-dropdown {
+    width: 250px;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 25px;
+    border: 1px solid var(--primary-color);
+    outline: none;
+    background-color: white;
+    box-shadow: inset 2px 2px 8px rgba(0, 0, 0, 0.1);
+    transition: border 0.3s ease-in-out;
+}
+
+.filter-dropdown {
+    cursor: pointer;
+    padding: 10px;
+}
+
+.search-bar:hover input, .search-bar:hover .filter-dropdown {
+    border: 2px solid var(--hover-bg);
+}
+
+/* Consistent Button Styling for Both Search Pages */
+.search-bar button {
+    padding: 12px 20px;
+    font-size: 1rem;
+    background-color: var(--hover-bg);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.search-bar button:hover {
+    background-color:var(--hover-bg); /* Darker Blue on Hover */
+}
+
+/* -------------------------------- */
+/* RESULTS PAGE */
+/* -------------------------------- */
+.results-container {
+    width: 90%;
+    margin: auto;
+    padding-top: 20px;
+}
+
+/* Results Count Section */
+.results-count {
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--text-dark);
+    background-color: var(--card-bg);
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+}
+
+/* Results Grid */
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Result Card */
+.result-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+    border-left: 5px solid var(--primary-color);
+}
+
+.result-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Expandable Content */
+.expandable-content {
+    margin-top: 10px;
+    border-top: 1px solid var(--primary-color);
+    padding-top: 10px;
+}
+
+/* Show More Button */
+.show-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.show-more-btn {
+    padding: 12px 18px;
+    font-size: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.show-more-btn:hover {
+    background-color: var(--hover-bg);
+}
+/* -------------------------------- */
+/* PERFORMANCE COMPARISION*/
+/* -------------------------------- */
+.performance-container {
+    width: 90%;
+    margin: 30px auto;
+    text-align: center;
+}
+
+/* Center the search bar */
+.search-bar {
+    display: flex;
+    justify-content: center;  /* Centers horizontally */
+    align-items: center;  /* Centers vertically */
+    gap: 12px;
+    margin: 20px auto;
+    max-width: 600px;  /* Ensures it doesn’t stretch too much */
+}
+
+.search-bar input {
+    width: 300px;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 25px;
+    border: 1px solid var(--primary-color);
+    outline: none;
+    background-color: white;
+    box-shadow: inset 2px 2px 8px rgba(0, 0, 0, 0.1);
+    transition: border 0.3s ease-in-out;
+}
+
+.search-bar input:focus {
+    border: 2px solid var(--hover-bg);
+}
+
+.compare-btn {
+    padding: 12px 18px;
+    font-size: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.compare-btn:hover {
+    background-color: var(--primary-dark);
+}
+
+
+.error-message {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.performance-results {
+    margin-top: 20px;
+}
+
+.performance-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.performance-table th, .performance-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+.performance-table th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.performance-table tr:nth-child(even) {
+    background-color: var(--secondary-color);
+}
+
+.performance-table tr:hover {
+    background-color: var(--accent-color);
+    color: black;
+}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { fetchPerformanceComparison } from "../services/performanceService";
 import { PerformanceMetrics } from "../types";
-import "../styles/performance.css";
+import "../styles/style.css";
 
 const PerformanceComparison: React.FC = () => {
   const [query, setQuery] = useState("");
@@ -10,6 +10,13 @@ const PerformanceComparison: React.FC = () => {
 
   const handleCompare = async () => {
     setError("");
+    setPerformanceData(null);
+    
+    if (!query.trim()) {
+      setError("Please enter a search query.");
+      return;
+    }
+
     try {
       const data = await fetchPerformanceComparison(query);
       console.log("Performance Data:", data); // Debugging API response
@@ -46,7 +53,7 @@ const PerformanceComparison: React.FC = () => {
         setError("Invalid API response structure.");
       }
     } catch (err) {
-      setError("Failed to fetch performance comparison.");
+      setError("Failed to fetch performance comparison. Please try again.");
     }
   };
 
@@ -62,59 +69,62 @@ const PerformanceComparison: React.FC = () => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button onClick={handleCompare}>Compare</button>
+        <button className="compare-btn" onClick={handleCompare}>Compare</button>
       </div>
 
-      {error && <p className="error">{error}</p>}
+      {error && <p className="error-message">{error}</p>}
 
       {performanceData && (
-        <table className="performance-table">
-          <thead>
-            <tr>
-              <th>Metric</th>
-              <th>Initial Search</th>
-              <th>Optimized Search</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Execution Time (ms)</td>
-              <td>{performanceData.executionTime.initialSearchMs?.toFixed(2) ?? "N/A"}</td>
-              <td>{performanceData.executionTime.optimizedSearchMs?.toFixed(2) ?? "N/A"}</td>
-            </tr>
-            <tr>
-              <td>Total Properties Found</td>
-              <td>{performanceData.resultsComparison.totalInitialResults ?? "N/A"}</td>
-              <td>{performanceData.resultsComparison.totalOptimizedResults ?? "N/A"}</td>
-            </tr>
-            <tr>
-              <td>Common Properties</td>
-              <td colSpan={2}>{performanceData.resultsComparison.commonProperties ?? "N/A"}</td>
-            </tr>
-            <tr>
-              <td>Unique Properties</td>
-              <td>{performanceData.resultsComparison.uniqueToInitial ?? "N/A"}</td>
-              <td>{performanceData.resultsComparison.uniqueToOptimized ?? "N/A"}</td>
-            </tr>
-            <tr>
-              <td>Search Effectiveness (Similarity Score)</td>
-              <td>{performanceData.searchEffectiveness.initialSimilarityScore?.toFixed(2) ?? "N/A"}</td>
-              <td>{performanceData.searchEffectiveness.optimizedSimilarityScore?.toFixed(2) ?? "N/A"}</td>
-            </tr>
-            <tr>
-              <td>Cache Hit?</td>
-              <td colSpan={2}>{performanceData.cachingPerformance.cacheHit ? "Yes" : "No"}</td>
-            </tr>
-            <tr>
-              <td>Cache Response Time (ms)</td>
-              <td colSpan={2}>{performanceData.cachingPerformance.cacheResponseTimeMs?.toFixed(2) ?? "N/A"}</td>
-            </tr>
-            <tr>
-              <td>Cache Miss?</td>
-              <td colSpan={2}>{performanceData.cachingPerformance.cacheMiss ? "Yes" : "No"}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div className="performance-results">
+          <h2>Comparison Results</h2>
+          <table className="performance-table">
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Initial Search</th>
+                <th>Optimized Search</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Execution Time (ms)</td>
+                <td>{performanceData.executionTime.initialSearchMs?.toFixed(2) ?? "N/A"}</td>
+                <td>{performanceData.executionTime.optimizedSearchMs?.toFixed(2) ?? "N/A"}</td>
+              </tr>
+              <tr>
+                <td>Total Properties Found</td>
+                <td>{performanceData.resultsComparison.totalInitialResults ?? "N/A"}</td>
+                <td>{performanceData.resultsComparison.totalOptimizedResults ?? "N/A"}</td>
+              </tr>
+              <tr>
+                <td>Common Properties</td>
+                <td colSpan={2}>{performanceData.resultsComparison.commonProperties ?? "N/A"}</td>
+              </tr>
+              <tr>
+                <td>Unique Properties</td>
+                <td>{performanceData.resultsComparison.uniqueToInitial ?? "N/A"}</td>
+                <td>{performanceData.resultsComparison.uniqueToOptimized ?? "N/A"}</td>
+              </tr>
+              <tr>
+                <td>Search Effectiveness (Similarity Score)</td>
+                <td>{performanceData.searchEffectiveness.initialSimilarityScore?.toFixed(2) ?? "N/A"}</td>
+                <td>{performanceData.searchEffectiveness.optimizedSimilarityScore?.toFixed(2) ?? "N/A"}</td>
+              </tr>
+              <tr>
+                <td>Cache Hit?</td>
+                <td colSpan={2}>{performanceData.cachingPerformance.cacheHit ? "Yes" : "No"}</td>
+              </tr>
+              <tr>
+                <td>Cache Response Time (ms)</td>
+                <td colSpan={2}>{performanceData.cachingPerformance.cacheResponseTimeMs?.toFixed(2) ?? "N/A"}</td>
+              </tr>
+              <tr>
+                <td>Cache Miss?</td>
+                <td colSpan={2}>{performanceData.cachingPerformance.cacheMiss ? "Yes" : "No"}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );
