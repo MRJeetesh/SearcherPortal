@@ -27,7 +27,3 @@ app.include_router(performance_router, prefix="/api/performance", tags=["Perform
 async def root():
     return{"message": "Welcome to the Searcher Portal API"}
 
-#Handling the favicon request
-#@app.get("/favicon.ico",include_in_schema=False)
-#async def favicon():
- #   return FileResponse("static/favicon.ico")
