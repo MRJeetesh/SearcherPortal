@@ -1,7 +1,7 @@
 # **Searcher Portal**
 
 ## **Overview**
-Searcher Portal is a robust property search application designed to perform fuzzy searches efficiently. It leverages **Levenshtein Distance** for initial searches and **Jaro-Winkler with N-Gram Matching** for optimized searches, ensuring high accuracy and performance. The system also integrates **Redis caching** to improve search response time and **MongoDB** as its database backend.
+Searcher Portal is a robust property search application designed to perform fuzzy searches efficiently. It utilizes **Levenshtein Distance** for initial searches and **Jaro-Winkler with N-Gram Matching** for optimized searches, ensuring high accuracy and performance. The optimized system also integrates **Redis caching** to improve search response time and **MongoDB** as its database backend.
 
 ## **Features**
 - **Initial Search**: Uses Levenshtein Distance for typo handling.
@@ -15,7 +15,7 @@ Searcher Portal is a robust property search application designed to perform fuzz
 - **Frontend**: React, TypeScript
 - **Database**: MongoDB (NoSQL)
 - **Caching**: Redis
-- **Deployment**: Docker, GitHub
+- **Deployment**: GitHub
 
 ## **Installation and Setup**
 ### **Prerequisites**
@@ -38,7 +38,6 @@ Ensure the following are installed:
 
 ## **Future Enhancements**
 - **Auto-Suggestions** for search queries.
-- **Advanced Filters** for property types and mortgage details.
 - **Recommendation Engine** based on past searches.
 - **Scalability Improvements** using cloud deployment.
 
