@@ -8,7 +8,9 @@
     --text-dark: #000000; /* Black */
     --text-light: #FFFFFF; /* White */
     --card-bg: #A8C4E0; /* Light Blue */
-    --hover-bg: #0066CC; /* Bright Blue */
+    --hover-bg: #0066cc; /* Bright Blue */
+    --back-btn:#022950;/*Dark Blue*/
+
 }
 
 /* Reset Default Styling */
@@ -19,7 +21,7 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Avenir';
     background-color: var(--background-light);
     color: var(--text-dark);
 }
@@ -60,12 +62,12 @@ body {
 
 .left {
     background-color: var(--primary-color);
-    color: var(--text-dark);
+    color: var(--text-light);
 }
 
 .right {
     background-color: var(--secondary-color);
-    color: var(--text-dark);
+    color: var(--text-light);
 }
 
 /* Consistent Search Box Style for HomePage */
@@ -369,4 +371,26 @@ body {
 .performance-table tr:hover {
     background-color: var(--accent-color);
     color: black;
+}
+/* -------------------------------- */
+/* BACK BUTTON */
+/* -------------------------------- */
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: none;
+    color: var(--back-btn);
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.back-btn:hover {
+    color: var(--hover-bg);
 }

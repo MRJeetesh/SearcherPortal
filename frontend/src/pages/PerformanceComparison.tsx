@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { fetchPerformanceComparison } from "../services/performanceService";
 import { PerformanceMetrics } from "../types";
 import "../styles/style.css";
+import { ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const PerformanceComparison: React.FC = () => {
   const [query, setQuery] = useState("");
   const [performanceData, setPerformanceData] = useState<PerformanceMetrics | null>(null);
   const [error, setError] = useState("");
-
+  const navigate = useNavigate();
   const handleCompare = async () => {
     setError("");
     setPerformanceData(null);
@@ -59,6 +61,9 @@ const PerformanceComparison: React.FC = () => {
 
   return (
     <div className="performance-container">
+      <button className="back-btn" onClick={() => navigate("/")}>
+        <ArrowLeft size={20} /> 
+      </button>
       <h1>Performance Comparison</h1>
       <p>Compare execution time, effectiveness, and caching performance of Initial vs Optimized search.</p>
 
